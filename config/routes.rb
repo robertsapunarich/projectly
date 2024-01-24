@@ -7,5 +7,9 @@ Rails.application.routes.draw do
 
   # Defines the root path route ("/")
   # root "employees#index"
+  post '/login', to: 'auth#login'
   post '/employees', to: 'employees#create'
+  post '/projects', to: 'projects#create'
+  post '/projects/tasks', to: 'projects#create_task'
+  post '/projects/tasks/subtasks', to: 'projects#create_subtask'
 end
