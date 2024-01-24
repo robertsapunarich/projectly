@@ -23,5 +23,7 @@ module Projectly
     #
     # config.time_zone = "Central Time (US & Canada)"
     # config.eager_load_paths << Rails.root.join("extras")
+
+    config.jwt_secret_key = 'supersecretkey'
   end
 end
