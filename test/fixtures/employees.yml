@@ -9,7 +9,10 @@ project_manager:
   email: "robbie@example.com"
   password_digest: <%= BCrypt::Password.create('passpass', cost: 5) %>
   work_focus: :project_manager
-# column: value
-#
-two: {}
-# column: value
+
+
+developer:
+  name: "Steve"
+  email: "steve@example.com"
+  password_digest: <%= BCrypt::Password.create('passpass', cost: 5) %>
+  work_focus: :development

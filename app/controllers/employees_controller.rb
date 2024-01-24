@@ -1,23 +1,16 @@
 class EmployeesController < ApplicationController
 
   def create
-    prepared_params = prepare_params(employee_params)
-    Employee.create(prepared_params)
+    if current_user.work_focus == :project_manager
+      Employee.create(employee_params)
+    else
+    end
     render json: "success", status: :created
   end
 
   private
 
-  def prepare_params(params)
-    {
-      name: params[:name],
-      email: params[:email],
-      password_digest: BCrypt::Password.create(params[:password]),
-      work_focus: params[:work_focus]
-    }
-  end
-
   def employee_params
-    params.require(:employee).permit(:name, :email, :password, :work_focus)
+    params.require(:employee).permit(:name, :email, :password, :password_confirmation, :work_focus)
   end
 end

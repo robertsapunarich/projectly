@@ -24,7 +24,20 @@ class EmployeesControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "other employees cannot create employees" do
-    assert false
+    emp = employees(:developer)
+    params = { 
+      employee: {
+        name: "Joe",
+        email: "joe@example.com",
+        password: "temp",
+        work_focus: :development
+      }
+    }
+
+    assert_no_difference 'Employee.count' do
+      post employees_path, params: params
+      assert_response 401
+    end
   end
 
 end
