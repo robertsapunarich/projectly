@@ -4,8 +4,12 @@
 # model remove the "{}" from the fixture names and add the columns immediately
 # below each fixture, per the syntax in the comments below
 #
-one: {}
-# column: value
-#
-two: {}
-# column: value
+task:
+  title: "a task"
+  description: "do the task"
+  work_focus: :development
+  due_date: "2024-12-24"
+  status: :not_started
+  project_manager: project_manager
+  project: test_project
+

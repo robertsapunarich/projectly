@@ -2,10 +2,6 @@ require "test_helper"
 require "bcrypt"
 
 class EmployeesControllerTest < ActionDispatch::IntegrationTest
-  # test "the truth" do
-  #   assert true
-  # end
-
   test "a project manager can create employees" do
     emp = employees(:project_manager)
     params = { 
