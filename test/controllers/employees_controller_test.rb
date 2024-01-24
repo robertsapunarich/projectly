@@ -18,7 +18,7 @@ class EmployeesControllerTest < ActionDispatch::IntegrationTest
     }
 
     assert_difference 'Employee.count' do
-      post employees_path, params: params
+      post employees_path, headers: {"Authorization": "Bearer #{emp.jwt}"}, params: params
       assert_response 201
     end
   end
@@ -35,7 +35,7 @@ class EmployeesControllerTest < ActionDispatch::IntegrationTest
     }
 
     assert_no_difference 'Employee.count' do
-      post employees_path, params: params
+      post employees_path,  headers: {"Authorization": "Bearer #{emp.jwt}"}, params: params
       assert_response 401
     end
   end
