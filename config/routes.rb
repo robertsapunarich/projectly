@@ -10,6 +10,7 @@ Rails.application.routes.draw do
   post '/login', to: 'auth#login'
   post '/employees', to: 'employees#create'
   post '/projects', to: 'projects#create'
-  post '/projects/tasks', to: 'projects#create_task'
-  post '/projects/tasks/subtasks', to: 'projects#create_subtask'
+  post '/projects/:project_id/tasks', to: 'projects#create_task'
+  post '/projects/:project_id/tasks/:task_id/subtasks', to: 'projects#create_subtask'
+  patch '/tasks/status', to: 'tasks#update_status'
 end
