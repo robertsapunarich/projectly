@@ -6,7 +6,7 @@ class ProjectsController < ApplicationController
       project = current_user.projects.create(project_params)
       render json: project, status: 201
     else
-      render json: {message: "not_authorized"}, status: 401
+      not_authorized
     end
   end
 
@@ -24,47 +24,35 @@ class ProjectsController < ApplicationController
 
       render json: task, status: :created
     else
-      render json: {message: "not authorized"}, status: :unauthorized
+      not_authorized
     end
   end
 
   def create_subtask
-    if current_user
-      task = Task.find(task_params[:task_id])
-      subtask = task.subtasks.create!(
-        project_id: task.project.id,
-        title: task_params[:title],
-        description: task_params[:description],
-        work_focus: task_params[:work_focus],
-        due_date: task_params[:due_date],
-        status: :not_started,
-        project_manager_id: task.project_manager_id
-      )
-      
-      render json: subtask, status: :created
-    else
-      render json: {message: "not authorized"}, status: :unauthorized
-    end
+    task = Task.find(task_params[:task_id])
+    subtask = task.subtasks.create!(
+      project_id: task.project.id,
+      title: task_params[:title],
+      description: task_params[:description],
+      work_focus: task_params[:work_focus],
+      due_date: task_params[:due_date],
+      status: :not_started,
+      project_manager_id: task.project_manager_id
+    )
+    
+    render json: subtask, status: :created
   end
 
   def projects
-    if current_user
-      projects = Project.all
+    projects = Project.all
 
-      render json: projects, status: :ok
-    else
-      render json: {message: "not authorized"}, status: :unauthorized
-    end
+    render json: projects, status: :ok
   end
 
   def tasks
-    if current_user
-      project = Project.find(task_params[:project_id])
-      
-      render json: project.as_json(include: :tasks), status: :ok
-    else
-      render json: {message: "not authorized"}, status: :unauthorized
-    end
+    project = Project.find(task_params[:project_id])
+    
+    render json: project.as_json(include: :tasks), status: :ok
   end
 
   private

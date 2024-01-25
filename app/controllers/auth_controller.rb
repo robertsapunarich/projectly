@@ -1,5 +1,6 @@
 class AuthController < ApplicationController
-
+  skip_before_action :authorize, only: [:login]
+  
   def login
     employee = Employee.find_by_email!(login_params[:email])
     if employee.authenticate(login_params[:password])

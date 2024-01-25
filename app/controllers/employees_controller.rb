@@ -5,7 +5,7 @@ class EmployeesController < ApplicationController
       Employee.create(employee_params)
       render json: "success", status: :created
     else
-      render json: {message: "not authorized"}, status: :unauthorized
+      not_authorized
     end
   end
 
