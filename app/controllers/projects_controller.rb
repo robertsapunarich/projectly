@@ -52,7 +52,7 @@ class ProjectsController < ApplicationController
   def tasks
     project = Project.find(task_params[:project_id])
     
-    render json: project.as_json(include: :tasks), status: :ok
+    render json: project.as_json(include: {tasks: {include: :subtasks}}), status: :ok
   end
 
   private
