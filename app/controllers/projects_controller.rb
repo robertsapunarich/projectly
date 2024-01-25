@@ -47,6 +47,26 @@ class ProjectsController < ApplicationController
     end
   end
 
+  def projects
+    if current_user
+      projects = Project.all
+
+      render json: projects, status: :ok
+    else
+      render json: {message: "not authorized"}, status: :unauthorized
+    end
+  end
+
+  def tasks
+    if current_user
+      project = Project.find(task_params[:project_id])
+      
+      render json: project.as_json(include: :tasks), status: :ok
+    else
+      render json: {message: "not authorized"}, status: :unauthorized
+    end
+  end
+
   private
 
   def project_params
