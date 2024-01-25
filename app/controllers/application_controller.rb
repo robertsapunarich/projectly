@@ -1,5 +1,6 @@
 class ApplicationController < ActionController::Base
   protect_from_forgery with: :null_session
+  before_action :authorize
 
   def current_user
     @user ||= begin
@@ -17,6 +18,18 @@ class ApplicationController < ActionController::Base
         nil
       end
     end
+  end
+
+  protected
+
+  def authorize
+    if !current_user
+      not_authorized
+    end
+  end
+
+  def not_authorized
+    render json: {message: "not authorized"}, status: :unauthorized
   end
   
 end
