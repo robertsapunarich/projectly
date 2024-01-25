@@ -103,4 +103,20 @@ class ProjectsControllerTest < ActionDispatch::IntegrationTest
     end
   end
 
+  test "an employee can view tasks" do
+    emp = employees(:developer)
+    project = projects(:test_project)
+
+    get "/projects/#{project.id}/tasks", headers: {"Authorization": "Bearer #{emp.jwt}"}
+    assert_response 200
+  end
+
+  test "an employee can view projects" do
+    emp = employees(:developer)
+    project = projects(:test_project)
+
+    get "/projects", headers: {"Authorization": "Bearer #{emp.jwt}"}
+    assert_response 200
+  end
+
 end
