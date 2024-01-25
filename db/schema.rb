@@ -10,12 +10,13 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_01_23_175104) do
+ActiveRecord::Schema[7.1].define(version: 2024_01_25_143928) do
   create_table "employee_tasks", force: :cascade do |t|
     t.integer "employee_id"
     t.integer "task_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["employee_id", "task_id"], name: "index_employee_tasks_on_employee_id_and_task_id", unique: true
   end
 
   create_table "employees", force: :cascade do |t|
@@ -25,6 +26,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_01_23_175104) do
     t.integer "work_focus"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["id"], name: "index_employees_on_id", unique: true
   end
 
   create_table "projects", force: :cascade do |t|
@@ -34,6 +36,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_01_23_175104) do
     t.integer "project_manager_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["id"], name: "index_projects_on_id", unique: true
   end
 
   create_table "tasks", force: :cascade do |t|
@@ -47,6 +50,8 @@ ActiveRecord::Schema[7.1].define(version: 2024_01_23_175104) do
     t.integer "project_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["id"], name: "index_tasks_on_id", unique: true
+    t.index ["supertask_id"], name: "index_tasks_on_supertask_id"
   end
 
 end
