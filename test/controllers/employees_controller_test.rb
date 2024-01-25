@@ -1,5 +1,4 @@
 require "test_helper"
-require "bcrypt"
 
 class EmployeesControllerTest < ActionDispatch::IntegrationTest
   test "a project manager can create employees" do
