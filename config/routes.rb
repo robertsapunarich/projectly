@@ -13,4 +13,5 @@ Rails.application.routes.draw do
   post '/projects/:project_id/tasks', to: 'projects#create_task'
   post '/projects/:project_id/tasks/:task_id/subtasks', to: 'projects#create_subtask'
   patch '/tasks/:task_id/status', to: 'tasks#update_status'
+  post '/tasks/:task_id/assign', to: 'tasks#assign'
 end

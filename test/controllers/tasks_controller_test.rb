@@ -80,4 +80,25 @@ class TasksControllerTest < ActionDispatch::IntegrationTest
     assert_equal("not_started", task.reload.status)
   end
 
+  test "a project manager may assign a task to multiple employees" do
+    proj_mgr = employees(:project_manager)
+    dev = employees(:developer)
+    designer = employees(:designer)
+    task = tasks(:task)
+
+    params = {
+      employee_ids: [
+        dev.id,
+        designer.id
+      ]
+    }
+
+    assert_difference 'EmployeeTask.count', 2 do
+      post "/tasks/#{task.id}/assign", headers: {"Authorization": "Bearer #{proj_mgr.jwt}"}, params: params
+      assert_response 201
+    end
+    
+    assert dev.tasks.count == 1
+    assert designer.tasks.count == 1
+  end
 end

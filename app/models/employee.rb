@@ -1,6 +1,7 @@
 class Employee < ApplicationRecord
   has_secure_password
-  has_many :tasks, through: :employee_task
+  has_many :employee_tasks
+  has_many :tasks, through: :employee_tasks
   has_many :projects, foreign_key: "project_manager_id"
   enum :work_focus, [:project_manager, :development, :design, :business, :research]
 

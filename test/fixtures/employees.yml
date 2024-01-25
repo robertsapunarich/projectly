@@ -16,3 +16,9 @@ developer:
   email: "steve@example.com"
   password_digest: <%= BCrypt::Password.create('passpass', cost: 5) %>
   work_focus: :development
+
+designer:
+  name: "Joe"
+  email: "joe@example.com"
+  password_digest: <%= BCrypt::Password.create('passpass', cost: 5) %>
+  work_focus: :design
